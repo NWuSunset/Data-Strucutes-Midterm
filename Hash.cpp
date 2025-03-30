@@ -30,6 +30,10 @@ void Hash::insert(int key, int data) {
 void Hash::deleteData(int key) { //data is the key
   int index = hashFunction(key);
 
+  if (table[index] == nullptr) {
+    return;
+  }
+  
   //if head condiiton
   if (table[index]->data == key) {
     Node* temp = table[index];
@@ -38,12 +42,8 @@ void Hash::deleteData(int key) { //data is the key
     return;
   }
 
-  if (table[index] == nullptr) {
-    return;
-  }
-
   Node* curr = table[index];
-  while (curr->next->data != key && curr->next != nullptr) {
+  while (curr->next != nullptr && curr->next->data != key) {
     curr = curr->next;
   }
 
